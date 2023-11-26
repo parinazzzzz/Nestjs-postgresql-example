@@ -1,0 +1,53 @@
+###################### Products ####################
+### Create a new product
+POST  http://localhost:3000/products
+content-type: application/json
+
+{
+    "name":" product 4",
+    "stock":10,
+    "measurement": {
+        "name": "killo",
+        "symbol": "k",
+        "id": 1
+    },
+    "category":{
+        "id":2,
+        "name":"vegetables"
+    }
+}
+
+### Get all products
+GET http://localhost:3000/products
+
+### Update the stock of a product
+PATCH   http://localhost:3000/products/2/stock
+content-type: application/json
+
+{
+    "stockNumber":7
+}
+
+###################### Meaurements ####################
+### Create a new measurement
+POST  http://localhost:3000/measurements
+content-type: application/json
+
+{
+    "name":"killo",
+    "symbol":"k"
+}
+
+
+###################### categories ####################
+### Create a new category
+POST  http://localhost:3000/categories
+content-type: application/json
+
+{
+    "name":"vegetables"
+}
+
+
+
+
