@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { SuppliersRepository } from '../../repository/supplier/suppliers.repository';
-import { SupplierEntity } from '../../entity/supplier/supplier.entity';
-import { CreateSupplierDto } from '../../dto/supplier/create-supplier.dto';
+import { SuppliersRepository } from './suppliers.repository';
+import { SupplierEntity } from './entity/supplier/supplier.entity';
+import { CreateSupplierDto } from './dto/supplier/create-supplier.dto';
 
 @Injectable()
 export class SuppliersService {

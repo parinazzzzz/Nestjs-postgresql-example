@@ -1,7 +1,7 @@
 import { Controller, Post, Body, Get } from '@nestjs/common';
-import { SupplierEntity } from '../../entity/supplier/supplier.entity';
-import { CreateSupplierDto } from '../../dto/supplier/create-supplier.dto';
-import { SuppliersService } from '../../service/supplier/suppliers.service';
+import { SupplierEntity } from './entity/supplier/supplier.entity';
+import { CreateSupplierDto } from './dto/supplier/create-supplier.dto';
+import { SuppliersService } from './suppliers.service';
 
 @Controller('suppliers')
 export class SuppliersController {
