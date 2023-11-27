@@ -15,7 +15,7 @@ export class DatabaseModule {
             type: 'postgres',
             url: 'postgres://postgres:postgres@postgres:5432/postgres', // Use the configuration value for the database URL
             entities,
-            synchronize: false,
+            synchronize: true,
           }),
           inject: [ConfigService],
         }),

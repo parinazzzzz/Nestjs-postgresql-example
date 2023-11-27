@@ -33,6 +33,14 @@ describe('ProductsController', () => {
           name: 'Measurement 1',
           symbol: 'Symbol 1',
         },
+        stock: 1,
+        category: { name: 'vegetables' },
+        supplierProducts: [
+          {
+            supplierId: 1,
+            price: 20,
+          },
+        ],
       };
       createProductDto.measurement.name = 'Measurement 1';
       createProductDto.measurement.symbol = 'Symbol 1';
@@ -45,13 +53,21 @@ describe('ProductsController', () => {
           name: 'Measurement 1',
           symbol: 'Symbol 1',
         },
+        stock: 1,
+        category: { id: 1, name: 'vegetables' },
+        supplierProducts: [
+          {
+            id: 1,
+            product: 1,
+            supplier: 1,
+            price: 20,
+          },
+        ],
       };
 
-      (productService.create as jest.Mock).mockImplementation(
-        (name, measurement) => {
-          return Promise.resolve(expectedProduct);
-        },
-      );
+      (productService.create as jest.Mock).mockImplementation(() => {
+        return Promise.resolve(expectedProduct);
+      });
 
       const result = await controller.create(createProductDto);
 

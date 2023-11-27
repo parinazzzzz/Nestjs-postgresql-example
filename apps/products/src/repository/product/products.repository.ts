@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { DataSource, EntityRepository, Repository } from 'typeorm';
 import { ProductEntity } from '../../entity/product/product.entity';
 import { CreateProductDto } from '../../dto/product/create-product.dto';
-import { MeasurementEntity } from '../../entity/measurement/measurement.entity';
 
 @EntityRepository(ProductEntity)
 @Injectable()
@@ -11,16 +10,6 @@ export class ProductRepository extends Repository<ProductEntity> {
     super(ProductEntity, dataSource.createEntityManager());
     this.dataSource = dataSource;
   }
-
-  // async createProduct(
-  //   name: string,
-  //   measurement: MeasurementEntity,
-  // ): Promise<ProductEntity> {
-  //   const product = new ProductEntity();
-  //   product.name = name;
-  //   product.measurement = measurement;
-  //   return this.save(product);
-  // }
 
   async createProduct(
     createProductDto: CreateProductDto,
@@ -32,6 +21,7 @@ export class ProductRepository extends Repository<ProductEntity> {
     return this.createQueryBuilder('product')
       .leftJoinAndSelect('product.measurement', 'measurement')
       .leftJoinAndSelect('product.category', 'category')
+      .leftJoinAndSelect('product.supplierProducts', 'supplierProduct')
       .getMany();
   }
 

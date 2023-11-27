@@ -12,9 +12,13 @@ content-type: application/json
         "id": 1
     },
     "category":{
-        "id":2,
+        "id":1,
         "name":"vegetables"
-    }
+    },
+    "supplierProducts":[{
+        "supplier_id":1,
+        "price":20
+    }]
 }
 
 ### Get all products
@@ -34,8 +38,8 @@ POST  http://localhost:3000/measurements
 content-type: application/json
 
 {
-    "name":"killo",
-    "symbol":"k"
+    "name":"gram",
+    "symbol":"g"
 }
 
 
@@ -47,6 +51,20 @@ content-type: application/json
 {
     "name":"vegetables"
 }
+
+
+###################### suppliers ####################
+### Create a new supplier
+POST  http://localhost:4000/suppliers
+content-type: application/json
+
+{
+    "name":"third supplier"
+}
+
+
+### Get all suppliers
+GET http://localhost:4000/suppliers
 
 
 

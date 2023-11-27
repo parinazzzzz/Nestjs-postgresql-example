@@ -28,3 +28,20 @@ services:
       PORT: 3000
     ports:
       - '3000:3000'
+  suppliers:
+    build:
+      context: .
+      dockerfile: ./apps/suppliers/Dockerfile
+      target: development
+    command: npm run start:dev suppliers
+    env_file:
+      - ./apps/suppliers/.env
+    environment:
+      POSTGRES_URI: postgres://postgres:postgres@postgres:5432/postgres
+      DB_PORT: 5432
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      DB_DATABASE: postgres
+      PORT: 4000
+    ports:
+      - '4000:4000'

@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ProductsController } from './controller/product/products.controller';
 import { ProductsService } from './service/product/products.service';
 import { DatabaseModule } from '@app/common';
@@ -15,7 +14,8 @@ import { CategoryEntity } from './entity/category/category.entity';
 import { categoriesController } from './controller/category/category.controller';
 import { CategoriesService } from './service/category/category.service';
 import { CategoryRepository } from './repository/category/category.repository';
-
+import { SupplierProductEntity } from 'apps/suppliers/src/entity/supplier-product/supplier-product.entity';
+import { SupplierEntity } from 'apps/suppliers/src/entity/supplier/supplier.entity';
 @Module({
   imports: [
     DatabaseModule.forRoot([
@@ -25,6 +25,8 @@ import { CategoryRepository } from './repository/category/category.repository';
       MeasurementRepository,
       CategoryEntity,
       CategoryRepository,
+      SupplierProductEntity,
+      SupplierEntity,
     ]),
     ConfigModule.forRoot({
       isGlobal: true,
@@ -32,17 +34,6 @@ import { CategoryRepository } from './repository/category/category.repository';
         POSTGRES_URI: Joi.string().required(),
         PORT: Joi.number().required(),
       }),
-    }),
-    SwaggerModule.forRoot({
-      routePrefix: 'api-docs',
-      swaggerOptions: {
-        docExpansion: 'none',
-        info: {
-          title: 'Your API Title',
-          description: 'Your API Description',
-        },
-      },
-      swaggerPath: 'swagger.json',
     }),
   ],
   controllers: [

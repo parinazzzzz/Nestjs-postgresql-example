@@ -31,29 +31,44 @@ describe('ProductsService', () => {
       const createProductDto: CreateProductDto = {
         name: 'Product 1',
         measurement: {
-          name: 'killo',
-          symbol: 'k',
-        }, // Create an instance of MeasurementEntity with properties
+          name: 'Measurement 1',
+          symbol: 'Symbol 1',
+        },
+        stock: 1,
+        category: { name: 'vegetables' },
+        supplierProducts: [
+          {
+            supplierId: 1,
+            price: 20,
+          },
+        ],
       };
 
       const expectedProduct: ProductEntity = {
         id: 1,
         name: 'Product 1',
         measurement: {
-          id: 2,
-          name: 'killo',
-          symbol: 'k',
-        }, // Create an instance of MeasurementEntity with properties
+          id: 1,
+          name: 'Measurement 1',
+          symbol: 'Symbol 1',
+        },
+        stock: 1,
+        category: { id: 1, name: 'vegetables' },
+        supplierProducts: [
+          {
+            id: 1,
+            product: 1,
+            supplier: 1,
+            price: 20,
+          },
+        ],
       };
 
       (repository.createProduct as jest.Mock).mockResolvedValue(
         expectedProduct,
       );
 
-      const result = await service.create(
-        createProductDto.name,
-        createProductDto.measurement as MeasurementEntity,
-      );
+      const result = await service.create(createProductDto);
 
       expect(repository.createProduct).toHaveBeenCalledWith(
         expect.objectContaining({

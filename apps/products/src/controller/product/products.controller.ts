@@ -2,7 +2,7 @@ import { Controller, Post, Body, Get, Patch, Param } from '@nestjs/common';
 import { ProductsService } from '../../service/product/products.service';
 import { CreateProductDto } from '../../dto/product/create-product.dto';
 import { ProductEntity } from '../../entity/product/product.entity';
-import { ApiTags, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
 
 @Controller('products')
 @ApiTags('Products')
@@ -11,6 +11,14 @@ export class ProductsController {
 
   @Post()
   @ApiOperation({ summary: 'Create a new product' })
+  @ApiResponse({
+    status: 201,
+    description: 'The record has been successfully created.',
+  })
+  @ApiBody({
+    type: CreateProductDto,
+    description: 'Json structure for product object',
+  })
   async create(
     @Body() createProductDto: CreateProductDto,
   ): Promise<ProductEntity> {
@@ -24,7 +32,7 @@ export class ProductsController {
   }
 
   @Patch(':id/stock')
-  @ApiOperation({ summary: 'increment or decreement the stock number' })
+  @ApiOperation({ summary: 'increment or decrement the stock number' })
   async updateStockNumber(
     @Param('id') id: number,
     @Body('stockNumber') stockNumber: number,
